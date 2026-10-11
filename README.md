@@ -133,7 +133,7 @@ curl -X POST http://localhost:8000/api/ask \
   "error": null
 }
 ```
-
+![alt text](image.png)
 ### Health Check
 
 ```bash
