@@ -156,13 +156,13 @@ The database is seeded with **20 rows** of realistic data across Austin TX, Atla
 
 ## ⚙️ Configuration
 
-| Environment Variable | Default                    | Description                          |
-| -------------------- | -------------------------- | ------------------------------------ |
-| `GEMINI_API_KEY`     | —                          | API key for Google Gemini (free tier)|
-| `GROQ_API_KEY`       | —                          | API key for Groq (optional)          |
-| `OPENAI_API_KEY`     | —                          | API key for OpenAI models            |
-| `ANTHROPIC_API_KEY`  | —                          | API key for Anthropic models         |
-| `LLM_MODEL`         | `gemini/gemini-1.5-flash`  | litellm model identifier             |
+| Environment Variable | Default                        | Description                          |
+| -------------------- | ------------------------------ | ------------------------------------ |
+| `GEMINI_API_KEY`     | —                              | API key for Google Gemini (free tier)|
+| `GROQ_API_KEY`       | —                              | API key for Groq (optional)          |
+| `OPENAI_API_KEY`     | —                              | API key for OpenAI models            |
+| `ANTHROPIC_API_KEY`  | —                              | API key for Anthropic models         |
+| `LLM_MODEL`          | `gemini/gemini-3.5-flash-lite` | litellm model identifier             |
 
 See [litellm docs](https://docs.litellm.ai/docs/providers) for all supported providers.
 
