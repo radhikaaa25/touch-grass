@@ -165,6 +165,7 @@ The database is seeded with **49 realistic rows** across Bengaluru, Mumbai, Pune
 
 ## ⚙️ Configuration
 
+<<<<<<< HEAD
 | Environment Variable | Default                    | Description                          |
 | -------------------- | -------------------------- | ------------------------------------ |
 | `GEMINI_API_KEY`     | —                          | API key for Google Gemini (free tier)|
@@ -172,6 +173,15 @@ The database is seeded with **49 realistic rows** across Bengaluru, Mumbai, Pune
 | `OPENAI_API_KEY`     | —                          | API key for OpenAI models            |
 | `ANTHROPIC_API_KEY`  | —                          | API key for Anthropic models         |
 | `LLM_MODEL`         | `gemini/gemini-3.5-flash-lite` | litellm model identifier         |
+=======
+| Environment Variable | Default                        | Description                          |
+| -------------------- | ------------------------------ | ------------------------------------ |
+| `GEMINI_API_KEY`     | —                              | API key for Google Gemini (free tier)|
+| `GROQ_API_KEY`       | —                              | API key for Groq (optional)          |
+| `OPENAI_API_KEY`     | —                              | API key for OpenAI models            |
+| `ANTHROPIC_API_KEY`  | —                              | API key for Anthropic models         |
+| `LLM_MODEL`          | `gemini/gemini-3.5-flash-lite` | litellm model identifier             |
+>>>>>>> aca39eafe4d2834d353b43ba6516429687ecac85
 
 See [litellm docs](https://docs.litellm.ai/docs/providers) for all supported providers.
 
