@@ -26,8 +26,8 @@ async def lifespan(app: FastAPI):
 
 # ── App ──────────────────────────────────────────────────────────────
 app = FastAPI(
-    title="Touch Grass API",
-    description="Natural-language search for outdoor activities powered by AI.",
+    title="Touch Grass India API",
+    description="Natural-language search for outdoor trails, treks, parks, and run clubs across India powered by AI.",
     version="1.0.0",
     lifespan=lifespan,
 )
@@ -35,7 +35,7 @@ app = FastAPI(
 # CORS – allow Vite dev server
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -75,4 +75,4 @@ async def ask_question(payload: AskRequest):
 @app.get("/api/health")
 async def health_check():
     """Simple health check endpoint."""
-    return {"status": "ok", "message": "Touch Grass API is running 🌿"}
+    return {"status": "ok", "message": "Touch Grass India API is running 🌿🇮🇳"}

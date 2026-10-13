@@ -1,6 +1,6 @@
-# 🌿 Touch Grass — Text-to-SQL Outdoor Activities Finder
+# 🌿 Touch Grass (India Edition 🇮🇳) — Text-to-SQL Outdoor Activities Finder
 
-Ask natural language questions about local trails, parks, and run clubs. An AI agent converts your question into a SQL query, runs it against an SQLite database, and returns the results — all in a beautiful, outdoor-themed UI.
+Ask natural language questions about local trails, scenic treks, parks, and run clubs across India. An AI agent converts your question into a SQL query, runs it against an SQLite database, and returns the results — all in a beautiful, outdoor-themed UI.
 
 ![Tech Stack](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
 ![Tech Stack](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black)
@@ -13,22 +13,24 @@ Ask natural language questions about local trails, parks, and run clubs. An AI a
 
 ```
 touch-grass/
-├── backend/
-│   ├── main.py            # FastAPI app with /api/ask endpoint
-│   ├── agent.py           # Text-to-SQL AI agent (litellm)
-│   ├── database.py        # SQLite setup, seeding, schema helper
-│   ├── requirements.txt   # Python dependencies
-│   └── outdoors.db        # Auto-generated SQLite database
-├── frontend/
-│   ├── src/
-│   │   ├── App.tsx        # Main React component
-│   │   ├── main.tsx       # React entry point
-│   │   └── index.css      # Tailwind CSS + custom styles
-│   ├── index.html         # HTML shell
-│   ├── vite.config.ts     # Vite + React + Tailwind config
-│   ├── tsconfig.json      # TypeScript configuration
-│   └── package.json       # Node dependencies
-└── README.md
+└── week1/
+    ├── backend/
+    │   ├── main.py            # FastAPI app with /api/ask endpoint
+    │   ├── agent.py           # Text-to-SQL AI agent (litellm + self-healing retry)
+    │   ├── database.py        # SQLite setup, Indian seed dataset, schema helper
+    │   ├── requirements.txt   # Python dependencies
+    │   └── outdoors.db        # Auto-generated SQLite database
+    ├── frontend/
+    │   ├── src/
+    │   │   ├── App.tsx        # Main React component
+    │   │   ├── main.tsx       # React entry point
+    │   │   └── index.css      # Tailwind CSS + custom styles
+    │   ├── index.html         # HTML shell
+    │   ├── vite.config.ts     # Vite + React + Tailwind config
+    │   ├── tsconfig.json      # TypeScript configuration
+    │   └── package.json       # Node dependencies
+    └── submission/
+        └── SUBMISSION.md      # Hacktoberfest challenge submission writeup
 ```
 
 ---
@@ -51,7 +53,7 @@ cd touch-grass
 ### 2. Backend Setup
 
 ```bash
-cd backend
+cd week1/backend
 
 # Create a virtual environment (recommended)
 python -m venv venv
@@ -79,7 +81,7 @@ The database is auto-created and seeded on first startup.
 ### 3. Frontend Setup
 
 ```bash
-cd frontend
+cd week1/frontend
 
 # Install dependencies
 npm install
@@ -99,41 +101,48 @@ The frontend runs at **http://localhost:5173**.
 ```bash
 curl -X POST http://localhost:8000/api/ask \
   -H "Content-Type: application/json" \
-  -d '{"question": "Show me easy trails under 3 miles with shade"}'
+  -d '{"question": "Show me easy trails under 5 km with shade"}'
 ```
 
 ### Expected Response
 
 ```json
 {
-  "generated_sql": "SELECT name, difficulty, length_miles, has_shade, location FROM trails WHERE LOWER(difficulty) = 'easy' AND length_miles < 3 AND has_shade = 1",
+  "generated_sql": "SELECT name, difficulty, length_km, has_shade, location FROM trails WHERE LOWER(difficulty) = 'easy' AND length_km < 5 AND has_shade = 1",
   "results": [
     {
-      "name": "Sunset Ridge Loop",
+      "name": "Turahalli Forest Trail",
       "difficulty": "easy",
-      "length_miles": 1.8,
+      "length_km": 3.2,
       "has_shade": 1,
-      "location": "Austin, TX"
+      "location": "Bengaluru, KA"
     },
     {
-      "name": "Lady Bird Lake Trail",
+      "name": "Bannerghatta Nature Walk",
       "difficulty": "easy",
-      "length_miles": 1.3,
+      "length_km": 2.8,
       "has_shade": 1,
-      "location": "Austin, TX"
+      "location": "Bengaluru, KA"
     },
     {
-      "name": "Piedmont Park Loop",
+      "name": "Kanheri Caves Nature Trail (SGNP)",
       "difficulty": "easy",
-      "length_miles": 2.4,
+      "length_km": 3.5,
       "has_shade": 1,
-      "location": "Atlanta, GA"
+      "location": "Mumbai, MH"
+    },
+    {
+      "name": "ARAI Hills (Vetal Tekdi) Loop",
+      "difficulty": "easy",
+      "length_km": 3.0,
+      "has_shade": 1,
+      "location": "Pune, MH"
     }
   ],
   "error": null
 }
 ```
-![alt text](image.png)
+
 ### Health Check
 
 ```bash
@@ -146,11 +155,11 @@ curl http://localhost:8000/api/health
 
 | Table       | Columns                                                   |
 | ----------- | --------------------------------------------------------- |
-| `trails`    | `id`, `name`, `difficulty`, `length_miles`, `has_shade`, `location` |
+| `trails`    | `id`, `name`, `difficulty`, `length_km`, `has_shade`, `location` |
 | `parks`     | `id`, `name`, `has_restrooms`, `allows_dogs`, `location`  |
-| `run_clubs` | `id`, `name`, `meeting_day`, `distance_miles`, `location` |
+| `run_clubs` | `id`, `name`, `meeting_day`, `distance_km`, `location`    |
 
-The database is seeded with **20 rows** of realistic data across Austin TX, Atlanta GA, Los Angeles CA, Brooklyn NY, Manhattan NY, and Houston TX.
+The database is seeded with **49 realistic rows** across Bengaluru, Mumbai, Pune, New Delhi, Gurugram, Hyderabad, Chennai, Kolkata, Dharamshala, and Goa.
 
 ---
 
@@ -162,7 +171,7 @@ The database is seeded with **20 rows** of realistic data across Austin TX, Atla
 | `GROQ_API_KEY`       | —                          | API key for Groq (optional)          |
 | `OPENAI_API_KEY`     | —                          | API key for OpenAI models            |
 | `ANTHROPIC_API_KEY`  | —                          | API key for Anthropic models         |
-| `LLM_MODEL`         | `gemini/gemini-1.5-flash`  | litellm model identifier             |
+| `LLM_MODEL`         | `gemini/gemini-3.5-flash-lite` | litellm model identifier         |
 
 See [litellm docs](https://docs.litellm.ai/docs/providers) for all supported providers.
 
@@ -170,13 +179,13 @@ See [litellm docs](https://docs.litellm.ai/docs/providers) for all supported pro
 
 ## 📝 Example Questions
 
-- "Show me easy trails under 3 miles with shade"
-- "Parks in Austin that allow dogs"
-- "Run clubs that meet on Saturday"
-- "All trails in Atlanta, GA"
-- "Parks with restrooms in New York"
-- "What are the hardest trails?"
-- "Find me a run club with a short distance"
+- "Show me easy trails under 5 km with shade"
+- "Parks in Bengaluru that allow dogs"
+- "Run clubs in Mumbai that meet on Sunday"
+- "Scenic treks and trails near Pune"
+- "Parks with restrooms in New Delhi"
+- "What are the hardest treks in the database?"
+- "Find me a short 5k run club in Hyderabad or Chennai"
 
 ---
 
