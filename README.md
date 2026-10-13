@@ -8,6 +8,10 @@ Ask natural language questions about local trails, scenic treks, parks, and run 
 ![Tech Stack](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
 
 ---
+<img width="1912" height="996" alt="image" src="https://github.com/user-attachments/assets/9be96ae0-bac8-4712-8205-a0b09bfa1960" />
+<img width="1885" height="902" alt="image" src="https://github.com/user-attachments/assets/7d94145d-d024-45aa-a2cf-e71346762520" />
+
+---
 
 ## 📁 Project Structure
 
